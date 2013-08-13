@@ -5,4 +5,12 @@ class CityGenTools
     end
     value || ''
   end
+
+  def self.d(side)
+    if side.is_a? Integer
+      rand(side) + 1
+    else
+      raise "Invalid dice roll #{side}"
+    end
+  end
 end
