@@ -2,7 +2,6 @@ Cityforge::Application.routes.draw do
 
   root :to => 'cities#index'
   get "cities/index"
-  get "cities/update"
   resources :cities
 
   # The priority is based upon order of creation: first created -> highest priority.

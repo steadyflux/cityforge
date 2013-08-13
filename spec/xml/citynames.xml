@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+CityGenerator Data and Templates by Jesse Morgan (morgajel) is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.
+Based on a work at https://github.com/morgajel/CityGenerator.
+-->
+
+<cityname title_chance="100" pre_chance="100" trailer_chance="100">
+    <title>Great</title>
+    <pre>La</pre>
+    <root>Karna</root>
+    <post>theria</post>
+    <trailer>Acres</trailer>
+</cityname>
