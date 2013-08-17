@@ -42,6 +42,7 @@ group :test, :development do
   gem 'rb-fsevent', :require => false
   gem 'guard-rspec'
   gem 'launchy'
+  gem 'rb-fsevent'
 end
 
 # Use ActiveModel has_secure_password

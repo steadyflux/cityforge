@@ -11,13 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130809040453) do
+ActiveRecord::Schema.define(version: 20130817010624) do
 
   create_table "cities", force: true do |t|
     t.string   "name"
     t.string   "age"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "education"
+    t.integer  "authority"
+    t.integer  "magic"
+    t.integer  "military"
+    t.integer  "tolerance"
+    t.integer  "economy"
+    t.integer  "moral"
+    t.integer  "order"
   end
 
 end

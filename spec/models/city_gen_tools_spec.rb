@@ -11,8 +11,4 @@ describe CityGenTools do
     CityGenTools.d(20) >= 1
   end
 
-  it 'should fail to roll a 5d1' do
-    expect {CityGenTools.d("5d1")}.to raise_error(RuntimeError)
-  end
-
 end
