@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130817010624) do
+ActiveRecord::Schema.define(version: 20130824165027) do
 
   create_table "cities", force: true do |t|
     t.string   "name"
@@ -26,6 +26,11 @@ ActiveRecord::Schema.define(version: 20130817010624) do
     t.integer  "economy"
     t.integer  "moral"
     t.integer  "order"
+    t.string   "size"
+    t.integer  "population_estimate"
+    t.integer  "size_modifier"
+    t.integer  "min_density"
+    t.integer  "max_density"
   end
 
 end

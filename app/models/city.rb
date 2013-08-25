@@ -11,7 +11,10 @@ class City < ActiveRecord::Base
     end
     City.generate_alignment.each do |k,v|
       c[k] = v
-    end    
+    end
+    City.generate_size.each do |k,v|
+      c[k] = v if c.attributes.has_key? k
+    end
     c
   end
 
@@ -46,9 +49,12 @@ class City < ActiveRecord::Base
     Hash[alignment_attr.map { |k, v| [k.to_sym, CityGenTools.d(100)]}]
   end
 
-  def self.generate_size
-    size_hash = CityGenTools.get_hash_value(@@city_data_hash["data"]["citysize"], "city")
-    puts size_hash
+  def self.generate_size(size=nil)
+    size_hash = CityGenTools.get_hash_attrs(@@city_data_hash["data"]["citysize"], "city", size)
+    # puts "size_hash: #{size_hash}"
+    size_delta = size_hash["maxpop"] - size_hash["minpop"]
+    size_hash["population_estimate"] = CityGenTools.d(size_delta) + size_hash["minpop"]
+    size_hash
   end
 
 end
