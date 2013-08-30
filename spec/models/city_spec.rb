@@ -8,15 +8,18 @@ describe City do
       hash["description"].should == "mature"
       hash["min"].should == 61
       hash["max"].should == 70
-      hash["age_mod"].should == -3
-      assert (61..70).include? hash["city_age"]
+      hash["age_modifier"].should == -3
+      hash["age_description"].should == "mature"
+      assert (61..70).include? hash["age"]
     end
 
     it "should return a valid city age with named input" do
       age_hash =  {"description"=>"elderly", "min"=>81, "max"=>90, "age_mod"=>-8}
       GenerationTools.should_receive(:get_hash_attrs).with(an_instance_of(Hash),an_instance_of(String),"elderly").and_return(age_hash)
       hash = City.generate_city_age("elderly")
-      assert (81..90).include? hash["city_age"]
+      hash["age_modifier"].should == -8
+      hash["age_description"].should == "elderly"
+      assert (81..90).include? hash["age"]
     end
 
     it "should return a valid city age with named input (no min)" do
@@ -24,7 +27,9 @@ describe City do
       GenerationTools.should_receive(:get_hash_attrs).with(an_instance_of(Hash),an_instance_of(String),"young").and_return(age_hash)
       hash = City.generate_city_age("young")
       hash["min"].should == nil
-      assert (0..10).include? hash["city_age"]
+      hash["age_modifier"].should == 10
+      hash["age_description"].should == "young"
+      assert (0..10).include? hash["age"]
     end    
 
     it "should return a valid city age with named input (no max)" do
@@ -32,7 +37,8 @@ describe City do
       GenerationTools.should_receive(:get_hash_attrs).with(an_instance_of(Hash),an_instance_of(String),"ancient").and_return(age_hash)
       hash = City.generate_city_age("ancient")
       hash["max"].should == nil
-      assert (91..Figaro.env.max_city_age.to_i).include? hash["city_age"]
+      hash["age_description"].should == "ancient"
+      assert (91..Figaro.env.max_city_age.to_i).include? hash["age"]
     end  
   end
 

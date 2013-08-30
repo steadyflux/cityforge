@@ -4,8 +4,8 @@ class City < ActiveRecord::Base
 
   def self.build_new_city
     c = City.new
+    c[:age] = Hash.new
     c.name = CityName.generate_city_name
-    c.age = City.generate_city_age
     City.generate_base_stats.each do |k,v|
       c[k] = v
     end
@@ -15,17 +15,21 @@ class City < ActiveRecord::Base
     City.generate_size.each do |k,v|
       c[k] = v if c.attributes.has_key? k
     end
+    City.generate_city_age.each do |k,v|
+      c[k] = v if c.attributes.has_key? k
+    end
     c
   end
 
-  #TODO modify city age by size_modifier
   #TODO factor this whole section to its own place ... grumble grumble skinny models
   def self.generate_city_age(age=nil)
     age_hash = GenerationTools.get_hash_attrs(@@city_data_hash["data"]["cityages"], "cityage", age)
     min = age_hash["min"].nil? ? 0 : age_hash["min"]
     max = age_hash["max"].nil? ? Figaro.env.max_city_age.to_i : age_hash["max"]
+    age_hash["age_modifier"] = age_hash["age_mod"]
+    age_hash["age_description"] = age_hash["description"]
     age_delta = max - min 
-    age_hash["city_age"] = GenerationTools.d(age_delta) + min
+    age_hash["age"] = GenerationTools.d(age_delta) + min
     age_hash
   end
 
@@ -61,5 +65,4 @@ class City < ActiveRecord::Base
     size_hash["population_estimate"] = GenerationTools.d(size_delta) + size_hash["minpop"]
     size_hash
   end
-
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130824165027) do
+ActiveRecord::Schema.define(version: 20130830011611) do
 
   create_table "cities", force: true do |t|
     t.string   "name"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20130824165027) do
     t.integer  "size_modifier"
     t.integer  "min_density"
     t.integer  "max_density"
+    t.string   "age_description"
+    t.integer  "age_modifier"
   end
 
 end
