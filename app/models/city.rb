@@ -1,6 +1,6 @@
 class City < ActiveRecord::Base
 
-  @@city_data_hash ||= Hash.from_xml(Nokogiri::XML(File.read(Figaro.env.xml_base + Figaro.env.city_data_file)).to_s)
+  @@city_data_hash ||= Hash.from_xml(Nokogiri::XML(File.read(Figaro.env.XML_BASE + "citydata.xml")).to_s)
 
   def self.build_new_city
     c = City.new

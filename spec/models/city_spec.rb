@@ -38,7 +38,7 @@ describe City do
       hash = City.generate_city_age("ancient")
       hash["max"].should == nil
       hash["age_description"].should == "ancient"
-      assert (91..Figaro.env.max_city_age.to_i).include? hash["age"]
+      assert (91..5000).include? hash["age"]
     end  
   end
 
