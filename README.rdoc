@@ -1,3 +1,5 @@
+{<img src="https://travis-ci.org/steadyflux/cityforge.png" />}[https://travis-ci.org/steadyflux/cityforge]
+
 == README
 
 Simple city generator based on the perl version here:
