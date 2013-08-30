@@ -2,4 +2,4 @@ language: ruby
 rvm:
   - ruby-2.0.0
 before_script:
-  - "rake db:migrate RAILS_ENV=test"
+  - "rake db:migrate RAILS_ENV=travis"
