@@ -28,7 +28,7 @@ class City < ActiveRecord::Base
     max = age_hash["max"].nil? ? Figaro.env.max_city_age.to_i : age_hash["max"]
     age_hash["age_modifier"] = age_hash["age_mod"]
     age_hash["age_description"] = age_hash["description"]
-    age_delta = max - min 
+    age_delta = max - min
     age_hash["age"] = GenerationTools.d(age_delta) + min
     age_hash
   end
