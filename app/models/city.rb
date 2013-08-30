@@ -19,8 +19,14 @@ class City < ActiveRecord::Base
   end
 
   #TODO modify city age by size_modifier
-  def self.generate_city_age
-    rand(Figaro.env.max_city_age.to_i).to_s
+  #TODO factor this whole section to its own place ... grumble grumble skinny models
+  def self.generate_city_age(age=nil)
+    age_hash = GenerationTools.get_hash_attrs(@@city_data_hash["data"]["cityages"], "cityage", age)
+    min = age_hash["min"].nil? ? 0 : age_hash["min"]
+    max = age_hash["max"].nil? ? Figaro.env.max_city_age.to_i : age_hash["max"]
+    age_delta = max - min 
+    age_hash["city_age"] = GenerationTools.d(age_delta) + min
+    age_hash
   end
 
   def self.generate_base_stats(stat_array=nil)
@@ -34,7 +40,7 @@ class City < ActiveRecord::Base
       Hash[base_attr.zip(stat_array)]
     else
       #taken from the CityGenerator.pm ... this generates values from -4 to 5 ... WHY?
-      Hash[base_attr.map { |k, v| [k.to_sym, [-5, [5,(CityGenTools.d(11)-5)].min].max]}]
+      Hash[base_attr.map { |k, v| [k.to_sym, [-5, [5,(GenerationTools.d(11)-5)].min].max]}]
     end
   end
 
@@ -46,14 +52,13 @@ class City < ActiveRecord::Base
         raise ("Invalid value passed in stat array: #{stat_array}")
       end
     end
-    Hash[alignment_attr.map { |k, v| [k.to_sym, CityGenTools.d(100)]}]
+    Hash[alignment_attr.map { |k, v| [k.to_sym, GenerationTools.d(100)]}]
   end
 
   def self.generate_size(size=nil)
-    size_hash = CityGenTools.get_hash_attrs(@@city_data_hash["data"]["citysize"], "city", size)
-    # puts "size_hash: #{size_hash}"
+    size_hash = GenerationTools.get_hash_attrs(@@city_data_hash["data"]["citysize"], "city", size)
     size_delta = size_hash["maxpop"] - size_hash["minpop"]
-    size_hash["population_estimate"] = CityGenTools.d(size_delta) + size_hash["minpop"]
+    size_hash["population_estimate"] = GenerationTools.d(size_delta) + size_hash["minpop"]
     size_hash
   end
 

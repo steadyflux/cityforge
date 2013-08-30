@@ -1,4 +1,4 @@
-module CityGenTools
+module GenerationTools
   def self.get_hash_value(hash, key, chance=100)
     if chance > rand(100)
       value = hash[key].is_a?(String) ? hash[key] : hash[key][rand(hash[key].length)]
@@ -8,11 +8,11 @@ module CityGenTools
 
   def self.get_hash_attrs(hash, key, name=nil)
     if name
-      attrs = hash[key][name]  
+      attrs = hash[key][name]
     else
-      attrs = hash[key].is_a?(Hash) ? hash[key] : hash[key][rand(hash[key].length)]  
+      attrs = hash[key].is_a?(Hash) ? hash[key] : hash[key][rand(hash[key].length)]
     end
-    attrs.each {|k,v| attrs[k] = v.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? v : v.to_i }
+    attrs.each {|k,v| attrs[k] = v.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? v : v.to_i }
   end
 
 

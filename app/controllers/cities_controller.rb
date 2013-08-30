@@ -4,21 +4,13 @@ class CitiesController < ApplicationController
   end
 
   def generate
+    params[:city][:name] = CityName.generate_city_name if params[:city][:name].blank?
+    params[:city][:age] = City.generate_city_age if params[:city][:age].blank?
     # City.create
-    if params[:city][:name].blank?
-      params[:city][:name] = CityName.generate_city_name
-    end
-    if params[:city][:age].blank?
-      params[:city][:age] = City.generate_city_age
-    end
-
-
-
   end
 
   def post_params
     params.require(:city).permit(:name, :age)
   end
-
 
 end
