@@ -1,0 +1,17 @@
+defaults: &defaults
+  xml_base: "./xml/"
+  max_city_age: 5000
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+  xml_base: "./spec/xml/"
+
+travis:
+  <<: *defaults
+  xml_base: "./spec/xml/"
+
+production:
+  <<: *defaults

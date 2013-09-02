@@ -1,6 +1,6 @@
 class City < ActiveRecord::Base
 
-  @@city_data_hash ||= Hash.from_xml(Nokogiri::XML(File.read(Figaro.env.XML_BASE + "citydata.xml")).to_s)
+  @@city_data_hash ||= Hash.from_xml(Nokogiri::XML(File.read(APP_CONFIG['xml_base'] + "citydata.xml")).to_s)
 
   def self.build_new_city
     c = City.new
@@ -25,7 +25,7 @@ class City < ActiveRecord::Base
   def self.generate_city_age(age=nil)
     age_hash = GenerationTools.get_hash_attrs(@@city_data_hash["data"]["cityages"], "cityage", age)
     min = age_hash["min"].nil? ? 0 : age_hash["min"]
-    max = age_hash["max"].nil? ? Figaro.env.max_city_age.to_i : age_hash["max"]
+    max = age_hash["max"].nil? ? APP_CONFIG['max_city_age'].to_i : age_hash["max"]
     age_hash["age_modifier"] = age_hash["age_mod"]
     age_hash["age_description"] = age_hash["description"]
     age_delta = max - min

@@ -1,7 +1,7 @@
 class CityName
 
   def self.generate_city_name
-    @@name_hash ||= Hash.from_xml(Nokogiri::XML(File.read(Figaro.env.XML_BASE + "citynames.xml")).to_s)
+    @@name_hash ||= Hash.from_xml(Nokogiri::XML(File.read(APP_CONFIG['xml_base'] + "citynames.xml")).to_s)
     hash = @@name_hash["cityname"] 
     cityname = ""
     cityname << GenerationTools.get_hash_value(hash, "title", hash["title_chance"].to_i) + ' '
