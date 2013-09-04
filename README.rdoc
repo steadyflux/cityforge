@@ -6,3 +6,5 @@ Simple city generator based on the perl version here:
 
 https://github.com/morgajel/CityGenerator
 
+
+Currently I am leaving out the weighted rolling based on a d(100) roll for some of the basic stuff. Might add it back in later.

@@ -22,12 +22,8 @@ class City < ActiveRecord::Base
   #TODO factor this whole section to its own place ... grumble grumble skinny models
   def self.generate_city_age(age=nil)
     age_hash = GenerationTools.get_hash_attrs(CITY_DATA_HASH["data"]["cityages"], "cityage", age)
-    min = age_hash["min"].nil? ? 0 : age_hash["min"]
-    max = age_hash["max"].nil? ? APP_CONFIG['max_city_age'].to_i : age_hash["max"]
     age_hash["age_modifier"] = age_hash["age_mod"]
     age_hash["age_description"] = age_hash["description"]
-    age_delta = max - min
-    age_hash["age"] = GenerationTools.d(age_delta) + min
     age_hash
   end
 

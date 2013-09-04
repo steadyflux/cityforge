@@ -7,11 +7,15 @@ Based on a work at https://github.com/morgajel/CityGenerator.
 <data>
 
 <citysize>
-    <city size="large town"    min="71"  max="80"  size_modifier="2"    minpop="3501"   maxpop="5000"  min_density="110" max_density="10000" gplimit="5000"/>
+    <city size="large town" size_modifier="2" minpop="3501"   maxpop="5000"  min_density="110" max_density="10000" gplimit="5000"/>
 </citysize>
 
 <cityages>
-    <cityage description="mature"       min='61'  max='70' age_mod='-3'  />
+    <cityage description="mature" age_mod='-3'  />
 </cityages>
+
+<pop_types>
+    <pop_type type="mixed" base_pop="mixed"   />
+</pop_types>
 
 </data>

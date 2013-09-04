@@ -6,40 +6,18 @@ describe City do
     it 'should generate a known age without input' do
       hash = City.generate_city_age
       hash["description"].should == "mature"
-      hash["min"].should == 61
-      hash["max"].should == 70
       hash["age_modifier"].should == -3
       hash["age_description"].should == "mature"
-      assert (61..70).include? hash["age"]
     end
 
     it "should return a valid city age with named input" do
-      age_hash =  {"description"=>"elderly", "min"=>81, "max"=>90, "age_mod"=>-8}
+      age_hash =  {"description"=>"elderly", "age_mod"=>-8}
       GenerationTools.should_receive(:get_hash_attrs).with(an_instance_of(Hash),an_instance_of(String),"elderly").and_return(age_hash)
       hash = City.generate_city_age("elderly")
       hash["age_modifier"].should == -8
       hash["age_description"].should == "elderly"
-      assert (81..90).include? hash["age"]
     end
-
-    it "should return a valid city age with named input (no min)" do
-      age_hash =  {"description"=>"young", "max"=>10, "age_mod"=>10}
-      GenerationTools.should_receive(:get_hash_attrs).with(an_instance_of(Hash),an_instance_of(String),"young").and_return(age_hash)
-      hash = City.generate_city_age("young")
-      hash["min"].should == nil
-      hash["age_modifier"].should == 10
-      hash["age_description"].should == "young"
-      assert (0..10).include? hash["age"]
-    end    
-
-    it "should return a valid city age with named input (no max)" do
-      age_hash =  {"description"=>"ancient", "min"=>91, "age_mod"=>10}
-      GenerationTools.should_receive(:get_hash_attrs).with(an_instance_of(Hash),an_instance_of(String),"ancient").and_return(age_hash)
-      hash = City.generate_city_age("ancient")
-      hash["max"].should == nil
-      hash["age_description"].should == "ancient"
-      assert (91..5000).include? hash["age"]
-    end  
+    
   end
 
   context 'when generating city base stats' do
@@ -111,7 +89,7 @@ describe City do
 
     it 'should generate a valid size with named input' do
       city_hash = {
-        "size"=>"city", "min"=> 86, "max"=> 90,
+        "size"=>"city", 
         "size_modifier" => 6, "minpop"=> 8001, "maxpop"=> 15000,
         "min_density" => 180, "max_density" => 22000, "gplimit"=> 15000}
       GenerationTools.should_receive(:get_hash_attrs).with(an_instance_of(Hash),an_instance_of(String),"city").and_return(city_hash)
