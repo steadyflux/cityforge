@@ -1,7 +1,5 @@
 class City < ActiveRecord::Base
 
-  @@city_data_hash ||= Hash.from_xml(Nokogiri::XML(File.read(APP_CONFIG['xml_base'] + "citydata.xml")).to_s)
-
   def self.build_new_city
     c = City.new
     c[:age] = Hash.new
@@ -23,7 +21,7 @@ class City < ActiveRecord::Base
 
   #TODO factor this whole section to its own place ... grumble grumble skinny models
   def self.generate_city_age(age=nil)
-    age_hash = GenerationTools.get_hash_attrs(@@city_data_hash["data"]["cityages"], "cityage", age)
+    age_hash = GenerationTools.get_hash_attrs(CITY_DATA_HASH["data"]["cityages"], "cityage", age)
     min = age_hash["min"].nil? ? 0 : age_hash["min"]
     max = age_hash["max"].nil? ? APP_CONFIG['max_city_age'].to_i : age_hash["max"]
     age_hash["age_modifier"] = age_hash["age_mod"]
@@ -60,7 +58,7 @@ class City < ActiveRecord::Base
   end
 
   def self.generate_size(size=nil)
-    size_hash = GenerationTools.get_hash_attrs(@@city_data_hash["data"]["citysize"], "city", size)
+    size_hash = GenerationTools.get_hash_attrs(CITY_DATA_HASH["data"]["citysize"], "city", size)
     size_delta = size_hash["maxpop"] - size_hash["minpop"]
     size_hash["population_estimate"] = GenerationTools.d(size_delta) + size_hash["minpop"]
     size_hash
